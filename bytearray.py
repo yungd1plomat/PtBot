@@ -1,6 +1,11 @@
 import json
 import struct
 
+# Расширение bytearray с дополнительными методами (поддержкой кодеков)
+# int - 4 байта
+# byte - 1 байт
+# boolean - 1 байт, значения 1 или 0
+# string - 1 байт boolean (пустая ли строка) | длина строки int (4 байта) | самая строка (длинной указанной ранее)
 class ByteArray(bytearray):
     
     def read_int(self):

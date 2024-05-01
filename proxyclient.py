@@ -22,7 +22,10 @@ class ProxyClient:
     def __receive_loop(self):
         while not self.__disconnecting:
             try:
+                # Читаем длину пакета (int - размер 4 байта)
                 raw_packet_len = ByteArray(self.__s.recv(4))
+
+                # Читаем ID пакета (int - размер 4 байта)
                 raw_packet_id = ByteArray(self.__s.recv(4))
                 if not raw_packet_len or not raw_packet_id or len(raw_packet_len) == 0 or len(raw_packet_id) == 0:
                     logging.error("Disconnected..")
@@ -50,7 +53,7 @@ class ProxyClient:
                 if packet_id == PACKETS.SET_CRYPT_KEYS:
                     self.__packets_queue.put((packet_id, data))
                     # Костыль, но похуй, баг заключался в том, 
-                    # что данные расшифровываются раньше, чем 
+                    # что данные расшифровываются раньше в другом потоке, чем 
                     # успевают устанавливаться ключи
                     # Возможный фикс - перенести логику установки ключей прямо сюда,
                     # но тогда возникают проблемы с отслеживанием пакетов и методами из другого потока (метод handshake)
