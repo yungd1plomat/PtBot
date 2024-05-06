@@ -88,7 +88,7 @@ def plot_online_data(hours_ago = 24, time_freq = '1h'):
     plt.ylabel('Online')
     plt.legend()
 
-    plt.yticks(np.arange(0, max(df['online']) + 10, step=10))
+    plt.yticks(np.arange(0, max(df['online']) + 50, step=50))
     plt.gca().xaxis.set_major_formatter(md.DateFormatter('%H:%M'))
     plt.gca().xaxis.set_tick_params(labelsize=8)
     plt.gca().yaxis.set_tick_params(labelsize=8)
@@ -122,7 +122,7 @@ def plot_battles_data(hours_ago = 24, time_freq = '1h'):
     plt.ylabel('Battles')
     plt.legend()
 
-    plt.yticks(np.arange(0, max(df['battles']) + 10, step=2))
+    plt.yticks(np.arange(0, max(df['battles']) + 10, step=10))
     plt.gca().xaxis.set_major_formatter(md.DateFormatter('%H:%M'))
     plt.gca().xaxis.set_tick_params(labelsize=8)
     plt.gca().yaxis.set_tick_params(labelsize=8)
